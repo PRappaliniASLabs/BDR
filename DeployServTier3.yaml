@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: bdr-service2
+  name: bdr-service3
   namespace: bdrnamespace
   labels:
     app: BDR_EKS2
@@ -11,17 +11,13 @@ spec:
   ports:
     - name: h
       protocol: TCP
-      port: 10010
-      targetPort: 10010
-    - name: j
-      protocol: TCP
-      port: 10011
-      targetPort: 10011
+      port: 10030
+      targetPort: 10030
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bdr2
+  name: bdr3
   namespace: bdrnamespace
   labels:
     app: bdr-app
@@ -36,7 +32,7 @@ spec:
       labels:
         app: bdr-app
         framework: java
-        tier: tier2
+        tier: tier3
     spec:
       affinity:
         nodeAffinity:
@@ -49,8 +45,7 @@ spec:
                 - amd64
                 - arm64
       containers:
-      - name: bdr2
-        image: docker.io/aslabs/bdr-app:latest
+      - name: bdr3
+        image: docker.io/aslabs/bdr-app-t3:latest
         ports:
-        - containerPort: 10010
-        - containerPort: 10011
+        - containerPort: 10030
