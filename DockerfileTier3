@@ -3,7 +3,7 @@ FROM openjdk:8-jdk-alpine
 # RUN addgroup -S devopsc && adduser -S javams -G devopsc
 # USER javams:devopsc
 
-ENV JAVA_OPTS="-Xmx128m -Xms128m -Dhttp.port=10030 -jar /opt/BDR_APP/testappserver.jar /opt/BDR_APP/3dTierconfig.xml"
+ENV JAVA_OPTS="-Xmx128m -Xms128m -Dhttp.port=30030 -jar /opt/BDR_APP/testappserver.jar /opt/BDR_APP/3dTierconfig.xml"
 
 # ARG JAR_FILE
 # ADD ${JAR_FILE} app.jar
@@ -14,5 +14,5 @@ COPY ./testappserver.jar /opt/BDR_APP/testappserver.jar
 
 VOLUME /tmp
 
-EXPOSE 10030
+EXPOSE 30030
 ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS" ]
