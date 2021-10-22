@@ -14,7 +14,7 @@
                 <sql-query type="callable" value="Execute sp_upate_price({GUID},25.49)"/>			
 			</sql-queries>
             <http-backends>
-                <url value="http://tier3:10030/http/to3d"/>
+                <url value="http://tier3:30030/http/to3d"/>
             </http-backends>            
 		</servlet-end-point>
         
