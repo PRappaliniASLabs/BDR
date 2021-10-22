@@ -69,7 +69,7 @@
 				<sql-query type="callable" value="Execute sp_upate_price({GUID},25.49)"/>			
 			</sql-queries>
             <http-backends>
-                <url value="http://tier2:10020/http/to2nd"/>            
+                <url value="http://tier2:30020/http/to2nd"/>            
 			          
                 <!-- <url fork="true" value="http://localhost:10001/http/ping"/> -->
             </http-backends>
