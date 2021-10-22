@@ -55,6 +55,13 @@ spec:
                 values:
                 - amd64
                 - arm64
+      {{- if or .Values.env.config .Values.env.secrets}}
+      envFrom:
+      {{- if .Values.env.config}}
+      - configMapRef:
+          name: {{.Values.name}}
+      {{- end}}
+      {{- end}}
       containers:
       - name: bdr1
         image: docker.io/aslabs/bdr-tier1:latest
