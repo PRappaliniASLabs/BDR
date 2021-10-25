@@ -1,0 +1,79 @@
+{{- if .Values.env.config}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{.Values.name}}
+data:
+{{.Values.env.config | toYaml | indent 2}}
+---
+{{- end}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: bdr-service1
+  namespace: bdrnamespace
+  labels:
+    app: BDR_JAVA-TIERS
+spec:
+  selector:
+    app: bdr-app
+  ports:
+  - name: h
+    protocol: TCP
+    port: 30010
+    targetPort: 30010
+    nodePort: 30010
+  - name: j
+    protocol: TCP
+    port: 30011
+    targetPort: 30011
+    nodePort: 30011
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bdr1
+  namespace: bdrnamespace
+  labels:
+    app: bdr-app
+    framework: java
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bdr-app
+  template:
+    metadata:
+      labels:
+        app: bdr-app
+        framework: java
+        tier: tier1
+    spec:
+      hostAliases:
+      - ip: "192.168.49.2"
+        hostnames:
+        - "tier2"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: beta.kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+                - arm64
+      containers:
+      - name: bdr1
+        image: docker.io/aslabs/bdr-tier1:latest
+        ports:
+        - containerPort: 30010
+        - containerPort: 30011
+        {{- if or .Values.env.config .Values.env.secrets}}
+        envFrom:
+        {{- if .Values.env.config}}
+        - configMapRef:
+            name: {{.Values.name}}
+        {{- end}}
+        {{- end}}

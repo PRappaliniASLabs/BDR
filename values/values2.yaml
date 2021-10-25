@@ -2,3 +2,4 @@ env:
   config:
     CATALINA_OPTS: -Dappdynamics.agent.nodeName=$(hostname)
 name: bdr-java-app
+tier: tier2
