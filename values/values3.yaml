@@ -1,5 +1,11 @@
 env:
   config:
     CATALINA_OPTS: -Dappdynamics.agent.nodeName=$(hostname)
-name: bdr-java-app
+appname: bdr-java-app
 tier: tier3
+servicename: bdr-service3
+namespace: bdrns
+deployname: bdr3
+containername: bdr3
+containerimage: docker.io/aslabs/bdr-tier3:latest
+ports: 1
