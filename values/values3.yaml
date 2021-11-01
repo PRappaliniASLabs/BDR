@@ -7,5 +7,5 @@ servicename: bdr-service3
 namespace: bdrns
 deployname: bdr3
 containername: bdr3
-containerimage: docker.io/aslabs/bdr-tier3:latest
+containerimage: docker.io/aslabs/bdr-node3:latest
 ports: 1

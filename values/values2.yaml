@@ -8,5 +8,5 @@ hostnames: tier3
 namespace: bdrns
 deployname: bdr2
 containername: bdr2
-containerimage: docker.io/aslabs/bdr-tier2:latest
+containerimage: docker.io/aslabs/bdr-node2:latest
 ports: 1
