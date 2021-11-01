@@ -4,7 +4,7 @@ env:
 appname: bdr-java-app
 tier: tier2
 servicename: bdr-service2
-hostnames: "tier3"
+hostnames: tier3
 namespace: bdrns
 deployname: bdr2
 containername: bdr2
